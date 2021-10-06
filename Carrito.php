@@ -28,6 +28,21 @@ class Carrito
 
         echo '</div>';
     }
+
+    public function quitar($indice)
+    {
+        unset($this->productos[$indice]);
+    }
+
+    public function masUnidad($indice)
+    {
+        $this->productos[$indice]->masUnidad();
+    }
+
+    public function menosUnidad($indice)
+    {
+        $this->productos[$indice]->menosUnidad();
+    }
 }
 
 
