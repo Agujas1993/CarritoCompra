@@ -4,9 +4,9 @@ class Carrito
 {
     private $productos = [];
 
-    public function meter($producto)
+    public function meter(iEnCarrito $elemento)
     {
-        $this->productos[] = $producto;
+        $this->productos[] = $elemento;
     }
 
     public function mostrar()
@@ -15,9 +15,21 @@ class Carrito
         $totalIva = 0;
         echo '<div class="carrito">';
 
-        foreach($this->productos as $prod){
+        foreach($this->productos as $key => $prod){
             echo '<article class="lineacarrito">';
+            
             echo $prod->mostrar();
+
+            $enlaceMasUnidad = "?accion=masunidad&indice=$key";
+            $enlaceMenosUnidad = "?accion=menosunidad&indice=$key";
+            $enlaceEliminar = "?accion=eliminar&indice=$key";
+
+            if($prod->permiteUnidades()) {
+                echo "<a href=\"$enlaceMenosUnidad\"> - </a> / <a href=\"$enlaceMasUnidad\"> + </a>" ;
+            }
+
+            echo "<a class=\"enlaceeliminar\" href=\"$enlaceEliminar\"> Eliminar </a>";
+
             echo '</article>';
 
             $total += $prod->precio();

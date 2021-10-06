@@ -1,6 +1,6 @@
 <?php
 
-class Producto
+class Producto implements iEnCarrito
 {
     private $nombre;
     private $precio;
@@ -38,6 +38,11 @@ class Producto
         if($this->cantidad > 0){
             $this->cantidad--;
         }
+    }
+
+    public function permiteUnidades()
+    {
+        return true;
     }
 }
 
