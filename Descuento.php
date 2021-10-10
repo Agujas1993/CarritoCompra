@@ -2,6 +2,7 @@
 
 class Descuento implements iEnCarrito
 {
+    use EnlaceComprar;
     private $motivo;
     private $descuento;
 
@@ -34,5 +35,13 @@ class Descuento implements iEnCarrito
     public function permiteUnidades()
     {
         return false;
+    }
+
+    public function __toString() 
+    {
+        $salida = "<br>" . $this->motivo . " " . $this->descuento
+        . " &euro;";
+        $salida .= $this->enlaceComprar();
+        return $salida;
     }
 }

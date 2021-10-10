@@ -2,8 +2,10 @@
 
 class Pack implements iEnCarrito
 {
+    use EnlaceComprar;
+    use MasMenos;
+
     private $productosPack;
-    private $cantidad = 1;
 
     public function __construct($productosPack)
     {
@@ -42,20 +44,20 @@ class Pack implements iEnCarrito
         }
         return $total * $this->cantidad;
     }
-    public function masUnidad($unidades = 1)
-    {
-        $this->cantidad += $unidades;
-    }
-    public function menosUnidad()
-    {
-        if($this->cantidad > 0){
-            $this->cantidad--;
-        }
-    }
+    
     public function permiteUnidades()
     {
         return true;
     }
+
+
+    public function __toString()
+    {
+        $salida = "<br>Pack: " . $this->precio() . " &euro;";
+        $salida .= $this->enlaceComprar();
+        return $salida;
+    }
+
 }
 
 ?>
